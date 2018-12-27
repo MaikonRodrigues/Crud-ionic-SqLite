@@ -1,0 +1,51 @@
+<!--
+  Generated template for the EditarProdutoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>editar-produto</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ 
+  <ion-list>
+ 
+    <ion-item>
+      <ion-label stacked>Nome</ion-label>
+      <ion-input type="text" name="nome" [(ngModel)]="model.nome"></ion-input>
+    </ion-item>
+ 
+    <ion-item>
+      <ion-label stacked>Preço</ion-label>
+      <ion-input type="number" name="preco" [(ngModel)]="model.preco"></ion-input>
+    </ion-item>
+ 
+    <ion-item>
+      <ion-label stacked>Vencimento</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" name="data" min="2018" max="2020-12-31" [(ngModel)]="model.data"></ion-datetime>
+    </ion-item>
+ 
+    <ion-item>
+      <ion-label stacked>Categoria</ion-label>
+      <ion-select name="categoria_id" [(ngModel)]="model.categoria_id">
+        <ion-option *ngFor="let categoria of categorias" value="{{ categoria.id }}">{{ categoria.nome}}</ion-option>
+      </ion-select>
+    </ion-item>
+ 
+    <ion-item>
+      <ion-label>Ativo</ion-label>
+      <ion-checkbox name="ativo" [(ngModel)]="model.ativo"></ion-checkbox>
+    </ion-item>
+ 
+  </ion-list>
+ 
+  <button ion-button block (click)="save()">Salvar</button>
+ 
+</ion-content>

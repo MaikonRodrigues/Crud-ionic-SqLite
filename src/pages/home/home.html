@@ -1,17 +1,46 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Inicio</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-searchbar (ionInput)="filtrarProdutos($event)" [(ngModel)]="searchText"></ion-searchbar>
+  <ion-list>
+    <ion-item-sliding *ngFor="let produto of produtos">
+ 
+      <button ion-item (click)="editarProdutos(produto.id)">
+        <h1>{{ produto.nome }}</h1>
+        <h2>{{ produto.categoria_nome }}</h2>
+        <h2>{{ produto.data | date:'dd/MM/yyyy' }}</h2>
+        <h2 class="preco">{{ produto.preco | currency:'BRL':true }}</h2>
+      </button>
+ 
+      <ion-item-options side="left">
+        <button ion-button color="danger" (click)="removerProdutos(produto)">
+          <ion-icon name="trash"></ion-icon>
+          Excluir
+        </button>
+      </ion-item-options>
+ 
+    </ion-item-sliding>
+  </ion-list>
+ 
+  <ion-fab right bottom>
+    <button ion-fab color="light" (click)="addProdutos()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+ 
 </ion-content>
+ 
+
+<ion-footer>
+  <ion-toolbar>
+    <p *ngIf="produtos">Total: {{ produtos.length }}</p>
+    <ion-list>
+      <ion-item no-lines>
+        <ion-label>Listar Inativos</ion-label>
+        <ion-toggle name="listarInativos" [(ngModel)]="onlyInactives" (ionChange)="getAllProdutos()"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-toolbar>
+</ion-footer>
